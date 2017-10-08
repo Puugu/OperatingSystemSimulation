@@ -20,14 +20,16 @@ private:
 	struct queueNode {
 		queueNode * nextNode;
 		queueNode * prevNode;
-		int dataVal;
+		int dataVal= 0;
+		int priorityVal = 0;
 	};
 
-	//create head, tail, current, and destruction pointers
+	//create head, tail, current, priority2, and destruction pointers
 	queueNode * head;
 	queueNode * tail;
 	queueNode * current;
 	queueNode * godzilla;
+	queueNode * priority2;
 
 public:
 	//constructor
