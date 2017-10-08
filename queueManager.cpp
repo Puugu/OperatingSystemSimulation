@@ -48,6 +48,18 @@ void queueManager::addNodeLIFO(int dataVal) {
 	newNode->dataVal = dataVal;
 	newNode->nextNode = NULL;
 	newNode->prevNode = NULL;
+
+	//check to see if head exists
+	if (!head) {
+		head = newNode;
+		tail = newNode;
+	}
+	else {
+		//insert node after tail
+		newNode->prevNode = tail;
+		tail->nextNode = newNode;
+		tail = newNode;
+	}
 }
 
 //create node and insert via sorting
