@@ -215,7 +215,28 @@ void queueManager::addNodePriority(int dataVal, int priorityVal) {
 }
 
 //display queue
-void displayQueue();
+void queueManager::displayQueue() {
+	//check to see if head exists
+	if (!head) {
+		cout << "ERROR: No list exists.\n";
+	}
+	else if (head == tail) {
+		//there is only one element in the list
+		//display that element
+		cout << head->dataVal << endl;
+	}
+	else {
+		//set current equal to the head
+		current = head;
+		do {
+			//display current value
+			cout << current->dataVal << ", ";
+			//increment current
+			current = current->nextNode;
+		} while (current->nextNode != NULL);
+		cout << endl;
+	}
+}
 
 //destructor
 queueManager::~queueManager() {
