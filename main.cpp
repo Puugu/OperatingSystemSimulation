@@ -38,7 +38,7 @@ void randomNumberGenerator(int lowNum, int highNum, int queue[100]) {
 	// This function generates a series of random numbers from 0 to 99
 	// Puugu
 	// Created: 7 October 2017
-	// Last Edit: 7 October 2017
+	// Last Edit: 8 October 2017
 
 	//initialize random seed
 	srand(time(0));

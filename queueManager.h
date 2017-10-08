@@ -23,7 +23,7 @@ private:
 		int dataVal;
 	};
 
-	//create head, tail, current, and destruction pointer
+	//create head, tail, current, and destruction pointers
 	queueNode * head;
 	queueNode * tail;
 	queueNode * current;

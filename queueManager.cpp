@@ -19,3 +19,37 @@ queueManager::queueManager() {
 	tail = NULL;
 	godzilla = NULL;
 }
+
+//create node and insert onto head (FIFO)
+void addNodeFIFO(int dataVal);
+
+//create node adn insert onto tail (LIFO)
+void addNodeLIFO(int dataVal);
+
+//create node and insert via sorting
+//largest to tail
+void addNodeSort(int dataVal);
+
+//create node and insert via priority
+void addNodePriority(int dataVal, int priorityVal);
+
+//display queue
+void displayQueue();
+
+//destructor
+queueManager::~queueManager() {
+	//set current and destruction pointers equal to the head
+	current = head;
+	godzilla = head;
+	//delete nodes in the list
+	while (godzilla != NULL) {
+		current = current->nextNode;
+		delete godzilla;
+		godzilla = current;
+	}
+	//set all pointers to null
+	godzilla = NULL;
+	current = NULL;
+	head = NULL;
+	tail = NULL;
+}
