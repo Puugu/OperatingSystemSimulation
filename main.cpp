@@ -23,14 +23,12 @@ int main() {
 	int queue4[100];
 	int queuePriority[100];
 
-	//call function to populate first queue
+	//call function to populate queues
 	randomNumberGenerator(0, 99, queue1);
-
-	//display to validate
-	for (int i = 0; i < 100; i++) {
-		cout << i<<"."<<queue1[i] << " ";
-	}
-	cout << endl;
+	randomNumberGenerator(0, 99, queue2);
+	randomNumberGenerator(0, 99, queue3);
+	randomNumberGenerator(0, 99, queue4);
+	randomNumberGenerator(1, 3, queuePriority);
 
 	system("pause");
 	return 0;
@@ -52,7 +50,6 @@ void randomNumberGenerator(int lowNum, int highNum, int queue[100]) {
 				//range of values, then adding lowNum back in places the values within
 				//the correct set of possible values
 		highNum -= lowNum;
-		cout << "high: " << highNum << " low: " << lowNum << endl;
 	}
 
 	//loop through array and populate with random numbers
