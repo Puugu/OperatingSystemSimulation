@@ -70,6 +70,41 @@ void queueManager::addNodeSort(int dataVal) {
 	newNode->dataVal = dataVal;
 	newNode->nextNode = NULL;
 	newNode->prevNode = NULL;
+
+	//check to see if head exists
+	if (!head) {
+		head = newNode;
+		tail = newNode;
+	}
+	//check to see if the data value is smaller than the tail
+	else if (newNode->dataVal < tail->dataVal) {
+		tail->nextNode = newNode;
+		newNode->prevNode = tail;
+		tail = newNode;
+	}
+	//check to see if data value is larger than the head
+	else if (newNode->dataVal >head->dataVal) {
+		newNode->nextNode = head;
+		head->prevNode = newNode;
+		head = newNode;
+	}
+	//iterate through the list to find where new node goes
+	else {
+		//set current = head
+		current = head;
+		while (current->nextNode != NULL) {
+			if (newNode->dataVal >= current->dataVal) {
+				//insert node
+				newNode->nextNode = current;
+				newNode->prevNode = current->prevNode;
+				current->prevNode->nextNode = newNode;
+				current->prevNode = newNode;
+			}
+			else {
+				current = current->nextNode;
+			}
+		}
+	}
 }
 
 //create node and insert via priority
