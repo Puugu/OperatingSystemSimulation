@@ -21,17 +21,53 @@ queueManager::queueManager() {
 }
 
 //create node and insert onto head (FIFO)
-void addNodeFIFO(int dataVal);
+void queueManager::addNodeFIFO(int dataVal) {
+	//create node
+	queueNode * newNode = new queueNode;
+	newNode->dataVal = dataVal;
+	newNode->nextNode = NULL;
+	newNode->prevNode = NULL;
+
+	//check to see if head exists
+	if (!head) {
+		head = newNode;
+		tail = newNode;
+	}
+	else {
+		//insert new node before head
+		newNode->nextNode = head;
+		head->prevNode = newNode;
+		head = newNode;
+	}
+}
 
 //create node adn insert onto tail (LIFO)
-void addNodeLIFO(int dataVal);
+void queueManager::addNodeLIFO(int dataVal) {
+	//create node
+	queueNode * newNode = new queueNode;
+	newNode->dataVal = dataVal;
+	newNode->nextNode = NULL;
+	newNode->prevNode = NULL;
+}
 
 //create node and insert via sorting
 //largest to tail
-void addNodeSort(int dataVal);
+void queueManager::addNodeSort(int dataVal) {
+	//create node
+	queueNode * newNode = new queueNode;
+	newNode->dataVal = dataVal;
+	newNode->nextNode = NULL;
+	newNode->prevNode = NULL;
+}
 
 //create node and insert via priority
-void addNodePriority(int dataVal, int priorityVal);
+void queueManager::addNodePriority(int dataVal, int priorityVal) {
+	//create node
+	queueNode * newNode = new queueNode;
+	newNode->dataVal = dataVal;
+	newNode->nextNode = NULL;
+	newNode->prevNode = NULL;
+}
 
 //display queue
 void displayQueue();
