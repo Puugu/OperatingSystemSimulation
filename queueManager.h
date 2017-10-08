@@ -24,12 +24,17 @@ private:
 		int priorityVal = 0;
 	};
 
-	//create head, tail, current, priority2, and destruction pointers
+	//create head, tail, current, priority1&2, and destruction pointers
 	queueNode * head;
 	queueNode * tail;
 	queueNode * current;
 	queueNode * godzilla;
-	queueNode * priority2;
+	queueNode * priority1Insert;
+	queueNode * priority2Insert;
+
+	//create priority2 (p2) and priority3 (p3) bool
+	bool first2;
+	bool first3;
 
 public:
 	//constructor
