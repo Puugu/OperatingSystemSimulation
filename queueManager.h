@@ -6,3 +6,7 @@ Puugu
 Project Created: 7 October 2017
 Last Edited: 7 October 2017
 *****************************************************************************************************/
+
+#include <iostream>
+
+using namespace std;
