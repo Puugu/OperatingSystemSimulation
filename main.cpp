@@ -2,7 +2,7 @@
 This project is designed to simulate how an operating system uses queues to manage the registers.
 Puugu
 Project Created: 7 October 2017
-Last Edited: 8 October 2017
+Last Edited: 28 October 2017
 *****************************************************************************************************/
 
 #include <iostream>
@@ -14,6 +14,7 @@ using namespace std;
 
 //function predicates
 void randomNumberGenerator(int lowNum, int highNum, int queue[100]);
+void intializeQueue(queueManager queueName, int queue[100]);
 
 int main() {
 	//declare and initialize variables, etc.
@@ -23,18 +24,33 @@ int main() {
 	int queue4[100];
 	int queuePriority[100];
 
-	//call function to populate queues
+	//call function to create pool for queues
 	randomNumberGenerator(0, 99, queue1);
 	randomNumberGenerator(0, 99, queue2);
 	randomNumberGenerator(0, 99, queue3);
 	randomNumberGenerator(0, 99, queue4);
 	randomNumberGenerator(1, 3, queuePriority);
 
+	//create sort queue objects
+	queueManager fifo;
+	queueManager lifo;
+	queueManager sorting;
+	queueManager priority;
+
+	//load each queue with the first ten values
+	for (int i = 0; i < 10; i++) {
+		fifo.addNodeFIFO(queue1[i]);
+		lifo.addNodeLIFO(queue2[i]);
+		sorting.addNodeSort(queue3[i]);
+		priority.addNodePriority(queue4[i], queuePriority[i]);
+	}
+
 	system("pause");
 	return 0;
 }
 
-void randomNumberGenerator(int lowNum, int highNum, int queue[100]) {
+void randomNumberGenerator(int lowNum, int highNum, int queue[100])
+{
 	// This function generates a series of random numbers from 0 to 99
 	// Puugu
 	// Created: 7 October 2017
