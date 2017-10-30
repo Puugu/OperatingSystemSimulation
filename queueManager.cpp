@@ -166,25 +166,20 @@ void queueManager::subNodeSort() {
 	}
 	else {
 		//check to see if queue only has one node
-		if (tail->prevNode == NULL) {
+		if (head->nextNode == NULL) {
 			//delete queue
-			delete tail;
-			tail = NULL;
+			delete head;
+			head = NULL;
 		}
 		else {
-			//pop node with highest priority
-			godzilla = tail;
-			tail->prevNode->nextNode = NULL;
-			tail = tail->prevNode;
+			//pop node with highest value
+			godzilla = head;
+			head->nextNode->prevNode = NULL;
+			head = head->nextNode;
 			delete godzilla;
 			godzilla = NULL;
 		}
 	}
-
-
-
-
-
 }
 
 //create node and insert via priority
@@ -292,11 +287,26 @@ void queueManager::addNodePriority(int dataVal, int priorityVal) {
 
 //subtract priority node
 void queueManager::subNodePriority() {
-
-
-
-
-
+	//check to see if head exists
+	if (!head) {
+		cout << "ERROR: No such node exists. PRIORITY QUEUE\n";
+	}
+	else {
+		//check to see if queue only has one node
+		if (tail->prevNode == NULL) {
+			//delete queue
+			delete tail;
+			tail = NULL;
+		}
+		else {
+			//pop node with highest priority
+			godzilla = tail;
+			tail->prevNode->nextNode = NULL;
+			tail = tail->prevNode;
+			delete godzilla;
+			godzilla = NULL;
+		}
+	}
 }
 
 //display queue
