@@ -45,13 +45,15 @@ void queueManager::addNodeFIFO(int dataVal) {
 	}
 }
 
-//subtract FIFO node
-void queueManager::subNodeFIFO(){
+//pop FIFO node
+void queueManager::popNodeFIFO(){
 	//check to see if head exists
 	if (!head) {
-		cout << "ERROR: No such node exists. FIFO QUEUE\n";
+		cout << "ERROR: FIFO QUEUE is empty.\n";
 	}
 	else {
+		//output data value of popped node
+		cout << "Popping: " << head->dataVal;
 		//check to see if more than one node exists
 		if (tail->prevNode == NULL) {
 			//empty queue
@@ -90,13 +92,15 @@ void queueManager::addNodeLIFO(int dataVal) {
 	}
 }
 
-//subtract LIFO node
-void queueManager::subNodeLIFO() {
+//pop LIFO node
+void queueManager::popNodeLIFO() {
 	//check to see if head exists
 	if (!head) {
-		cout << "ERROR: No such node exists. LIFO QUEUE\n";
+		cout << "ERROR: LIFO QUEUE is empty.\n";
 	}
 	else {
+		//output data value of popped node
+		cout << "Popping: " << head->dataVal;
 		//check to see if there is more than one node
 		if (head->nextNode == NULL) {
 			delete head;
@@ -158,13 +162,15 @@ void queueManager::addNodeSort(int dataVal) {
 	}
 }
 
-//subtract sort node
-void queueManager::subNodeSort() {
+//pop sort node
+void queueManager::popNodeSort() {
 	//check to see if head exists
 	if (!head) {
-		cout << "ERROR: No such node exists. SORT QUEUE\n";
+		cout << "ERROR: SORT QUEUE is empty.\n";
 	}
 	else {
+		//output data value of popped node
+		cout << "Popping: " << head->dataVal;
 		//check to see if queue only has one node
 		if (head->nextNode == NULL) {
 			//delete queue
@@ -285,13 +291,15 @@ void queueManager::addNodePriority(int dataVal, int priorityVal) {
 	}
 }
 
-//subtract priority node
-void queueManager::subNodePriority() {
+//pop priority node
+void queueManager::popNodePriority() {
 	//check to see if head exists
 	if (!head) {
-		cout << "ERROR: No such node exists. PRIORITY QUEUE\n";
+		cout << "ERROR: PRIORITY QUEUE is empty.\n";
 	}
 	else {
+		//output data value of popped node
+		cout << "Popping: " << tail->dataVal;
 		//check to see if queue only has one node
 		if (tail->prevNode == NULL) {
 			//delete queue

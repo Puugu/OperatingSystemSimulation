@@ -14,7 +14,6 @@ using namespace std;
 
 //function predicates
 void randomNumberGenerator(int lowNum, int highNum, int queue[100]);
-void intializeQueue(queueManager queueName, int queue[100]);
 
 int main() {
 	//declare and initialize variables, etc.

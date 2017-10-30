@@ -47,26 +47,26 @@ public:
 	void addNodeFIFO (int dataVal);
 
 	//pop node (FIFO)
-	void subNodeFIFO();
+	void popNodeFIFO();
 
 	//create node adn insert onto tail (LIFO)
 	void addNodeLIFO(int dataVal);
 
 	//pop node LIFO
-	void subNodeLIFO();
+	void popNodeLIFO();
 
 	//create node and insert via sorting
 		//largest to tail
 	void addNodeSort(int dataVal);
 
 	//pop node sort
-	void subNodeSort();
+	void popNodeSort();
 
 	//create node and insert via priority
 	void addNodePriority(int dataVal, int priorityVal);
 
 	//pop node priority
-	void subNodePriority();
+	void popNodePriority();
 
 	//display queue
 	void displayQueue();
