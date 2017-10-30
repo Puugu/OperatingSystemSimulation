@@ -2,7 +2,7 @@
 These are the methods for managing the queues.
 Puugu
 Project Created: 7 October 2017
-Last Edited: 8 October 2017
+Last Edited: 30 October 2017
 *****************************************************************************************************/
 
 #include "queueManager.h"
@@ -45,6 +45,16 @@ void queueManager::addNodeFIFO(int dataVal) {
 	}
 }
 
+//subtract FIFO node
+void queueManager::subNodeFIFO(){
+
+
+
+
+
+
+}
+
 //create node adn insert onto tail (LIFO)
 void queueManager::addNodeLIFO(int dataVal) {
 	//create node
@@ -64,6 +74,16 @@ void queueManager::addNodeLIFO(int dataVal) {
 		tail->nextNode = newNode;
 		tail = newNode;
 	}
+}
+
+//subtract LIFO node
+void queueManager::subNodeLIFO() {
+
+
+
+
+
+
 }
 
 //create node and insert via sorting
@@ -109,6 +129,16 @@ void queueManager::addNodeSort(int dataVal) {
 			}
 		}
 	}
+}
+
+//subtract sort node
+void queueManager::subNodeSort() {
+
+
+
+
+
+
 }
 
 //create node and insert via priority
@@ -214,6 +244,15 @@ void queueManager::addNodePriority(int dataVal, int priorityVal) {
 	}
 }
 
+//subtract priority node
+void queueManager::subNodePriority() {
+
+
+
+
+
+}
+
 //display queue
 void queueManager::displayQueue() {
 	//check to see if head exists
@@ -234,7 +273,7 @@ void queueManager::displayQueue() {
 			//increment current
 			current = current->nextNode;
 		} while (current->nextNode != NULL);
-		cout << endl;
+		cout << endl; 
 	}
 }
 

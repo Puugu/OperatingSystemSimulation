@@ -4,7 +4,7 @@
 This is the header file for managing the queue for the operating systems simulation.
 Puugu
 Project Created: 7 October 2017
-Last Edited: 8 October 2017
+Last Edited: 30 October 2017
 *****************************************************************************************************/
 
 #include <iostream>
@@ -46,15 +46,27 @@ public:
 	//create node and insert onto head (FIFO)
 	void addNodeFIFO (int dataVal);
 
+	//pop node (FIFO)
+	void subNodeFIFO();
+
 	//create node adn insert onto tail (LIFO)
 	void addNodeLIFO(int dataVal);
+
+	//pop node LIFO
+	void subNodeLIFO();
 
 	//create node and insert via sorting
 		//largest to tail
 	void addNodeSort(int dataVal);
 
+	//pop node sort
+	void subNodeSort();
+
 	//create node and insert via priority
 	void addNodePriority(int dataVal, int priorityVal);
+
+	//pop node priority
+	void subNodePriority();
 
 	//display queue
 	void displayQueue();
