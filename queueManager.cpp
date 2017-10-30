@@ -49,7 +49,7 @@ void queueManager::addNodeFIFO(int dataVal) {
 void queueManager::subNodeFIFO(){
 	//check to see if head exists
 	if (!head) {
-		cout << "ERROR: No such node exists. LIFO QUEUE\n";
+		cout << "ERROR: No such node exists. FIFO QUEUE\n";
 	}
 	else {
 		//check to see if more than one node exists
@@ -94,7 +94,7 @@ void queueManager::addNodeLIFO(int dataVal) {
 void queueManager::subNodeLIFO() {
 	//check to see if head exists
 	if (!head) {
-		cout << "ERROR: No such node exists. FIFO QUEUE\n";
+		cout << "ERROR: No such node exists. LIFO QUEUE\n";
 	}
 	else {
 		//check to see if there is more than one node
@@ -110,13 +110,7 @@ void queueManager::subNodeLIFO() {
 			delete godzilla;
 			godzilla = NULL;
 		}
-
 	}
-
-
-
-
-
 }
 
 //create node and insert via sorting
@@ -166,7 +160,26 @@ void queueManager::addNodeSort(int dataVal) {
 
 //subtract sort node
 void queueManager::subNodeSort() {
-
+	//check to see if head exists
+	if (!head) {
+		cout << "ERROR: No such node exists. SORT QUEUE\n";
+	}
+	else {
+		//check to see if queue only has one node
+		if (tail->prevNode == NULL) {
+			//delete queue
+			delete tail;
+			tail = NULL;
+		}
+		else {
+			//pop node with highest priority
+			godzilla = tail;
+			tail->prevNode->nextNode = NULL;
+			tail = tail->prevNode;
+			delete godzilla;
+			godzilla = NULL;
+		}
+	}
 
 
 
