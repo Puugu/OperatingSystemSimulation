@@ -53,7 +53,7 @@ void queueManager::popNodeFIFO(){
 	}
 	else {
 		//output data value of popped node
-		cout << "Popping: " << head->dataVal;
+		cout << "Popping: " << head->dataVal<<endl;
 		//check to see if more than one node exists
 		if (tail->prevNode == NULL) {
 			//empty queue
@@ -100,7 +100,7 @@ void queueManager::popNodeLIFO() {
 	}
 	else {
 		//output data value of popped node
-		cout << "Popping: " << head->dataVal;
+		cout << "Popping: " << head->dataVal<<endl;
 		//check to see if there is more than one node
 		if (head->nextNode == NULL) {
 			delete head;
@@ -170,7 +170,7 @@ void queueManager::popNodeSort() {
 	}
 	else {
 		//output data value of popped node
-		cout << "Popping: " << head->dataVal;
+		cout << "Popping: " << head->dataVal<<endl;
 		//check to see if queue only has one node
 		if (head->nextNode == NULL) {
 			//delete queue
@@ -299,7 +299,7 @@ void queueManager::popNodePriority() {
 	}
 	else {
 		//output data value of popped node
-		cout << "Popping: " << tail->dataVal;
+		cout << "Popping: " << tail->dataVal << endl;
 		//check to see if queue only has one node
 		if (tail->prevNode == NULL) {
 			//delete queue

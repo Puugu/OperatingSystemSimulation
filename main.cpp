@@ -14,6 +14,10 @@ using namespace std;
 
 //function predicates
 void randomNumberGenerator(int lowNum, int highNum, int queue[100]);
+void processFIFOQueue(queueManager fifo, int queue[100]);
+void processLIFOQueue(queueManager lifo, int queue[100]);
+void processSortQueue(queueManager sort, int queue[100]);
+void processPriorityQueue(queueManager priority, int queue[100]);
 
 int main() {
 	//declare and initialize variables, etc.
@@ -36,13 +40,9 @@ int main() {
 	queueManager sorting;
 	queueManager priority;
 
-	//load each queue with the first ten values
-	for (int i = 0; i < 10; i++) {
-		fifo.addNodeFIFO(queue1[i]);
-		lifo.addNodeLIFO(queue2[i]);
-		sorting.addNodeSort(queue3[i]);
-		priority.addNodePriority(queue4[i], queuePriority[i]);
-	}
+	//iterate through each queue
+	processFIFOQueue(fifo, queue1);
+
 
 	system("pause");
 	return 0;
@@ -71,4 +71,36 @@ void randomNumberGenerator(int lowNum, int highNum, int queue[100])
 	for (int i = 0; i < 100; i++) {
 		queue[i] = rand() % highNum + lowNum;
 	}
+}
+
+void processFIFOQueue(queueManager fifo, int queue[100]) {
+	// This function iterates through the fifo queue
+	// Puugu
+	// Created: 30 October 2017
+	// Last Edit: 30 October 2017
+
+	//initialize queue
+	for (int i = 0; i < 10; i++) {
+		fifo.addNodeFIFO(queue[i]);
+	}
+
+	//iterate through remainder of array, popping and adding to queue
+	for (int i = 0; i < 100; i++) {
+		fifo.popNodeFIFO();
+		if (i < 90) {
+			fifo.addNodeFIFO(queue[i]);
+		}
+	}
+}
+
+void processLIFOQueue(queueManager lifo, int queue[100]) {
+
+}
+
+void processSortQueue(queueManager sort, int queue[100]) {
+
+}
+
+void processPriorityQueue(queueManager priority, int queue[100]) {
+
 }
