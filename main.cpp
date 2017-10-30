@@ -42,6 +42,7 @@ int main() {
 
 	//iterate through each queue
 	processFIFOQueue(fifo, queue1);
+	processLIFOQueue(lifo, queue2);
 
 
 	system("pause");
@@ -94,7 +95,23 @@ void processFIFOQueue(queueManager fifo, int queue[100]) {
 }
 
 void processLIFOQueue(queueManager lifo, int queue[100]) {
+	// This function iterates through the lifo queue
+	// Puugu
+	// Created: 30 October 2017
+	// Last Edit: 30 October 2017
 
+	//initialize queue
+	for (int i = 0; i < 10; i++) {
+		lifo.addNodeLIFO(queue[i]);
+	}
+
+	//iterate through remainder of array, popping and adding to queue
+	for (int i = 0; i < 100; i++) {
+		lifo.popNodeLIFO();
+		if (i < 90) {
+			lifo.addNodeLIFO(queue[i]);
+		}
+	}
 }
 
 void processSortQueue(queueManager sort, int queue[100]) {
