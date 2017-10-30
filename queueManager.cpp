@@ -52,12 +52,20 @@ void queueManager::subNodeFIFO(){
 		cout << "ERROR: No such node exists. LIFO QUEUE\n";
 	}
 	else {
-		//remove node at tail
-		godzilla = tail;
-		tail->prevNode->nextNode = NULL;
-		tail = tail->prevNode;
-		delete godzilla;
-		godzilla = NULL;
+		//check to see if more than one node exists
+		if (tail->prevNode == NULL) {
+			//empty queue
+			delete tail;
+			tail = NULL;
+		}
+		else {
+			//remove node at tail
+			godzilla = tail;
+			tail->prevNode->nextNode = NULL;
+			tail = tail->prevNode;
+			delete godzilla;
+			godzilla = NULL;
+		}
 	}
 }
 
