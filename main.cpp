@@ -17,7 +17,7 @@ void randomNumberGenerator(int lowNum, int highNum, int queue[100]);
 void processFIFOQueue(queueManager fifo, int queue[100]);
 void processLIFOQueue(queueManager lifo, int queue[100]);
 void processSortQueue(queueManager sort, int queue[100]);
-void processPriorityQueue(queueManager priority, int queue[100]);
+void processPriorityQueue(queueManager priority, int queue[100], int queuePriority[100]);
 
 int main() {
 	//declare and initialize variables, etc.
@@ -41,8 +41,10 @@ int main() {
 	queueManager priority;
 
 	//iterate through each queue
-	processFIFOQueue(fifo, queue1);
-	processLIFOQueue(lifo, queue2);
+	//processFIFOQueue(fifo, queue1);
+	//processLIFOQueue(lifo, queue2);
+	//processSortQueue(sorting, queue3);
+	processPriorityQueue(priority, queue4, queuePriority);
 
 
 	system("pause");
@@ -115,9 +117,41 @@ void processLIFOQueue(queueManager lifo, int queue[100]) {
 }
 
 void processSortQueue(queueManager sort, int queue[100]) {
+	// This function iterates through the sorted queue
+	// Puugu
+	// Created: 30 October 2017
+	// Last Edit: 30 October 2017
 
+	//initialize queue
+	for (int i = 0; i < 10; i++) {
+		sort.addNodeSort(queue[i]);
+	}
+
+	//iterate through remainder of array, popping and adding to queue
+	for (int i = 0; i < 100; i++) {
+		sort.popNodeSort();
+		if (i < 90) {
+			sort.addNodeSort(queue[i]);
+		}
+	}
 }
 
-void processPriorityQueue(queueManager priority, int queue[100]) {
+void processPriorityQueue(queueManager priority, int queue[100], int queuePriority[100]) {
+	// This function iterates through the priority-sorted queue
+	// Puugu
+	// Created: 30 October 2017
+	// Last Edit: 30 October 2017
 
+	//initialize queue
+	for (int i = 0; i < 10; i++) {
+		priority.addNodePriority(queue[i], queuePriority[i]);
+	}
+
+	//iterate through remainder of array, popping and adding to queue
+	for (int i = 0; i < 100; i++) {
+		priority.popNodePriority();
+		if (i < 90) {
+			priority.addNodePriority(queue[i], queuePriority[i]);
+		}
+	}
 }
