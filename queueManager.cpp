@@ -84,7 +84,26 @@ void queueManager::addNodeLIFO(int dataVal) {
 
 //subtract LIFO node
 void queueManager::subNodeLIFO() {
+	//check to see if head exists
+	if (!head) {
+		cout << "ERROR: No such node exists. FIFO QUEUE\n";
+	}
+	else {
+		//check to see if there is more than one node
+		if (head->nextNode == NULL) {
+			delete head;
+			head = NULL;
+		}
+		else {
+			//remove node at head
+			godzilla = head;
+			head->nextNode->prevNode = NULL;
+			head = head->nextNode;
+			delete godzilla;
+			godzilla = NULL;
+		}
 
+	}
 
 
 
