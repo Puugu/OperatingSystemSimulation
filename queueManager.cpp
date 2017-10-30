@@ -47,12 +47,18 @@ void queueManager::addNodeFIFO(int dataVal) {
 
 //subtract FIFO node
 void queueManager::subNodeFIFO(){
-
-
-
-
-
-
+	//check to see if head exists
+	if (!head) {
+		cout << "ERROR: No such node exists. LIFO QUEUE\n";
+	}
+	else {
+		//remove node at tail
+		godzilla = tail;
+		tail->prevNode->nextNode = NULL;
+		tail = tail->prevNode;
+		delete godzilla;
+		godzilla = NULL;
+	}
 }
 
 //create node adn insert onto tail (LIFO)
