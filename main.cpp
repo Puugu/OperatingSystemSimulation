@@ -41,10 +41,13 @@ int main() {
 	queueManager priority;
 
 	//iterate through each queue
-	//processFIFOQueue(fifo, queue1);
+	processFIFOQueue(fifo, queue1);
 	//processLIFOQueue(lifo, queue2);
 	//processSortQueue(sorting, queue3);
-	processPriorityQueue(priority, queue4, queuePriority);
+	//processPriorityQueue(priority, queue4, queuePriority);
+
+	//delete queues
+	//fifo.~queueManager();
 
 
 	system("pause");
@@ -88,12 +91,14 @@ void processFIFOQueue(queueManager fifo, int queue[100]) {
 	}
 
 	//iterate through remainder of array, popping and adding to queue
-	for (int i = 0; i < 100; i++) {
+	/*for (int i = 0; i < 100; i++) {
 		fifo.popNodeFIFO();
 		if (i < 90) {
 			fifo.addNodeFIFO(queue[i]);
 		}
-	}
+	}*/
+
+	fifo.displayQueue();
 }
 
 void processLIFOQueue(queueManager lifo, int queue[100]) {

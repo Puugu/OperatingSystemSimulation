@@ -337,24 +337,31 @@ void queueManager::displayQueue() {
 			//increment current
 			current = current->nextNode;
 		} while (current->nextNode != NULL);
-		cout << endl; 
+		//display data value of last node
+		cout << current->dataVal << endl; 
 	}
 }
 
 //destructor
 queueManager::~queueManager() {
-	//set current and destruction pointers equal to the head
-	current = head;
-	godzilla = head;
-	//delete nodes in the list
-	while (godzilla != NULL) {
-		current = current->nextNode;
-		delete godzilla;
-		godzilla = current;
+	//check to see if head exists
+	if (!head) {
+		cout << "ERROR: No list exists.\n";
 	}
-	//set all pointers to null
-	godzilla = NULL;
-	current = NULL;
-	head = NULL;
-	tail = NULL;
+	else {
+		//set current and destruction pointers equal to the head
+		current = head;
+		godzilla = head;
+		//delete nodes in the list
+		while (godzilla != NULL) {
+			current = current->nextNode;
+			delete godzilla;
+			godzilla = current;
+		}
+		//set all pointers to null
+		godzilla = NULL;
+		current = NULL;
+		head = NULL;
+		tail = NULL;
+	}
 }
