@@ -2,7 +2,7 @@
 This project is designed to simulate how an operating system uses queues to manage the registers.
 Puugu
 Project Created: 7 October 2017
-Last Edited: 28 October 2017
+Last Edited: 9 November 2017
 *****************************************************************************************************/
 
 #include <iostream>
@@ -41,14 +41,10 @@ int main() {
 	queueManager priority;
 
 	//iterate through each queue
-	processFIFOQueue(fifo, queue1);
+	processFIFOQueue(fifo, queue1); // Will output that list is empty when finished
 	//processLIFOQueue(lifo, queue2);
 	//processSortQueue(sorting, queue3);
 	//processPriorityQueue(priority, queue4, queuePriority);
-
-	//delete queues
-	//fifo.~queueManager();
-
 
 	system("pause");
 	return 0;
@@ -91,14 +87,15 @@ void processFIFOQueue(queueManager fifo, int queue[100]) {
 	}
 
 	//iterate through remainder of array, popping and adding to queue
-	/*for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 100; i++) {
 		fifo.popNodeFIFO();
 		if (i < 90) {
-			fifo.addNodeFIFO(queue[i]);
+			fifo.addNodeFIFO(queue[i+10]);
 		}
-	}*/
+	}
 
-	fifo.displayQueue();
+	//exit function
+	return;
 }
 
 void processLIFOQueue(queueManager lifo, int queue[100]) {

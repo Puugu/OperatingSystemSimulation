@@ -2,7 +2,7 @@
 These are the methods for managing the queues.
 Puugu
 Project Created: 7 October 2017
-Last Edited: 30 October 2017
+Last Edited: 9 November 2017
 *****************************************************************************************************/
 
 #include "queueManager.h"
@@ -53,12 +53,13 @@ void queueManager::popNodeFIFO(){
 	}
 	else {
 		//output data value of popped node
-		cout << "Popping: " << head->dataVal<<endl;
+		cout << "Popping: " << tail->dataVal<<endl;
 		//check to see if more than one node exists
 		if (tail->prevNode == NULL) {
 			//empty queue
 			delete tail;
 			tail = NULL;
+			head = NULL;
 		}
 		else {
 			//remove node at tail
@@ -105,6 +106,7 @@ void queueManager::popNodeLIFO() {
 		if (head->nextNode == NULL) {
 			delete head;
 			head = NULL;
+			tail = NULL;
 		}
 		else {
 			//remove node at head
@@ -176,6 +178,7 @@ void queueManager::popNodeSort() {
 			//delete queue
 			delete head;
 			head = NULL;
+			tail = NULL;
 		}
 		else {
 			//pop node with highest value
@@ -305,6 +308,7 @@ void queueManager::popNodePriority() {
 			//delete queue
 			delete tail;
 			tail = NULL;
+			head = NULL;
 		}
 		else {
 			//pop node with highest priority
@@ -338,7 +342,7 @@ void queueManager::displayQueue() {
 			current = current->nextNode;
 		} while (current->nextNode != NULL);
 		//display data value of last node
-		cout << current->dataVal << endl; 
+		cout << current->dataVal << endl;
 	}
 }
 
@@ -346,7 +350,7 @@ void queueManager::displayQueue() {
 queueManager::~queueManager() {
 	//check to see if head exists
 	if (!head) {
-		cout << "ERROR: No list exists.\n";
+		cout << "List is empty.\n";
 	}
 	else {
 		//set current and destruction pointers equal to the head
