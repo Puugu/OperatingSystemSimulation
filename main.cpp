@@ -42,8 +42,10 @@ int main() {
 
 	//iterate through each queue
 	processFIFOQueue(fifo, queue1); // Will output that list is empty when finished
-	//processLIFOQueue(lifo, queue2);
-	//processSortQueue(sorting, queue3);
+	system("CLS");
+	processLIFOQueue(lifo, queue2); // Will output that list is empty when finished
+	system("CLS");
+	processSortQueue(sorting, queue3);
 	//processPriorityQueue(priority, queue4, queuePriority);
 
 	system("pause");
