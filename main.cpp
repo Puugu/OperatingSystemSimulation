@@ -53,6 +53,7 @@ int main() {
 	singleRegisterSimulation(queue1, queue2, queue3, queue4, queuePriority);
 
 	//run 4-4 register simulation
+	multiRegisterSimulation(queue1, queue2, queue3, queue4, queuePriority);
 
 	system("pause");
 	return 0;
@@ -168,6 +169,7 @@ void processPriorityQueue(queueManager priority, int queue[100], int queuePriori
 
 void singleRegisterSimulation(int queue1[100], int queue2[100], int queue3[100], int queue4[100], int queuePriority[100]) {
 	// This function uses one input and one output register to write the data to the file
+			//(It's so ugly and inefficient, but it gets the job done for the assignment and the clock is ticking on that)
 	// Puugu
 	// Created: 16 November 2017
 	// Last Edit: 16 November 2017
@@ -181,7 +183,6 @@ void singleRegisterSimulation(int queue1[100], int queue2[100], int queue3[100],
 	queueManager lifo;
 	queueManager sorting;
 	queueManager priority;
-	ofstream outputFile("output.txt");
 
 	//fill beginning queue and registers with first 10 values
 	for (int i = 0; i < 10; i++) {
@@ -230,12 +231,71 @@ void singleRegisterSimulation(int queue1[100], int queue2[100], int queue3[100],
 			clockIn++;
 		}
 	}
-	cout << "Clock In: " << clockIn << endl << "Clock Out: " << clockOut << endl;
+	cout << "Clock In: " << clockIn << endl;
+	cout << "Clock Out: " << clockOut << endl;
 }
 
 void multiRegisterSimulation(int queue1[100], int queue2[100], int queue3[100], int queue4[100], int queuePriority[100]) {
 	// This function uses four input and four output registers to write the data to the file
+			//This code is so inefficient it hurts to turn it in....
 	// Puugu
 	// Created: 16 November 2017
 	// Last Edit: 16 November 2017
+
+	//declare and initialize variables, etc.
+	int clockIn = 0;
+	int clockOut = 0;
+	int regIn1 = 0;
+	int regIn2 = 0;
+	int regIn3 = 0;
+	int regIn4 = 0;
+	int regOut1 = 0;
+	int regOut2 = 0;
+	int regOut3 = 0;
+	int regOut4 = 0;
+	queueManager fifo;
+	queueManager lifo;
+	queueManager sorting;
+	queueManager priority;
+	
+	//fill beginning queue and registers with first 10 values
+	for (int i = 0; i < 10; i++) {
+		regIn1 = queue1[i];
+		regIn2 = queue2[i];
+		regIn3 = queue3[i];
+		regIn4 = queue4[i];
+		fifo.addNodeFIFO(regIn1);
+		lifo.addNodeLIFO(regIn2);
+		sorting.addNodeSort(regIn3);
+		priority.addNodePriority(regIn4, queuePriority[i]);
+		clockIn++;
+	}
+
+	//move through the rest of the queue
+	for (int i = 0; i < 100; i++) {
+		//pop value from each of the queues
+		regOut1 = fifo.getFIFOpop();
+		regOut2 = lifo.getLIFOpop();
+		regOut3 = sorting.getSORTpop();
+		regOut4 = priority.getPRIORITYpop();
+		fifo.popNodeFIFO();
+		lifo.popNodeLIFO();
+		sorting.popNodeSort();
+		priority.popNodePriority();
+		clockOut++;
+		//add new value to queue
+		if (i < 90) {
+			regIn1 = queue1[i+10];
+			regIn2 = queue2[i+10];
+			regIn3 = queue3[i+10];
+			regIn4 = queue4[i+10];
+			fifo.addNodeFIFO(regIn1);
+			lifo.addNodeLIFO(regIn2);
+			sorting.addNodeSort(regIn3);
+			priority.addNodePriority(regIn4, queuePriority[i+10]);
+			clockIn++;
+		}
+	}
+	cout << "Clock In: " << clockIn << endl;
+	cout << "Clock Out: " << clockOut << endl;
 }
