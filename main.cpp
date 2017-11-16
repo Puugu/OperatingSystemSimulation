@@ -2,7 +2,7 @@
 This project is designed to simulate how an operating system uses queues to manage the registers.
 Puugu
 Project Created: 7 October 2017
-Last Edited: 9 November 2017
+Last Edited: 15 November 2017
 *****************************************************************************************************/
 
 #include <iostream>
@@ -104,7 +104,7 @@ void processLIFOQueue(queueManager lifo, int queue[100]) {
 	// This function iterates through the lifo queue
 	// Puugu
 	// Created: 30 October 2017
-	// Last Edit: 30 October 2017
+	// Last Edit: 15 November 2017
 
 	//initialize queue
 	for (int i = 0; i < 10; i++) {
@@ -115,7 +115,7 @@ void processLIFOQueue(queueManager lifo, int queue[100]) {
 	for (int i = 0; i < 100; i++) {
 		lifo.popNodeLIFO();
 		if (i < 90) {
-			lifo.addNodeLIFO(queue[i]);
+			lifo.addNodeLIFO(queue[i+10]);
 		}
 	}
 }
@@ -124,18 +124,18 @@ void processSortQueue(queueManager sort, int queue[100]) {
 	// This function iterates through the sorted queue
 	// Puugu
 	// Created: 30 October 2017
-	// Last Edit: 30 October 2017
+	// Last Edit: 15 November 2017
 
 	//initialize queue
 	for (int i = 0; i < 10; i++) {
 		sort.addNodeSort(queue[i]);
 	}
-
+	
 	//iterate through remainder of array, popping and adding to queue
 	for (int i = 0; i < 100; i++) {
 		sort.popNodeSort();
 		if (i < 90) {
-			sort.addNodeSort(queue[i]);
+			sort.addNodeSort(queue[i+10]);
 		}
 	}
 }

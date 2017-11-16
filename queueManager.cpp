@@ -2,7 +2,7 @@
 These are the methods for managing the queues.
 Puugu
 Project Created: 7 October 2017
-Last Edited: 9 November 2017
+Last Edited: 15 November 2017
 *****************************************************************************************************/
 
 #include "queueManager.h"
@@ -133,30 +133,36 @@ void queueManager::addNodeSort(int dataVal) {
 		head = newNode;
 		tail = newNode;
 	}
-	//check to see if the data value is smaller than the tail
-	else if (newNode->dataVal < tail->dataVal) {
-		tail->nextNode = newNode;
-		newNode->prevNode = tail;
-		tail = newNode;
-	}
-	//check to see if data value is larger than the head
-	else if (newNode->dataVal >head->dataVal) {
+	//check to see if new node is greater than the head (and will therefore go before it)
+	else if (newNode->dataVal >= head->dataVal) {
 		newNode->nextNode = head;
 		head->prevNode = newNode;
 		head = newNode;
 	}
-	//iterate through the list to find where new node goes
+	//check to see if new node is smaller than the tail (and will therefore go after it)
+	else if (newNode->dataVal <=tail->dataVal){
+		newNode->prevNode = tail;
+		tail->nextNode = newNode;
+		tail = newNode;
+	}
+	//iterate through the list to find where the sorted value goes
 	else {
-		//set current = head
+		//set current equal to head
 		current = head;
-		while (current->nextNode != NULL) {
+		
+		while (current != NULL) {
+			//check to see if current dataVal is less than the new node
+			//(therefore, newNode will go before current)
 			if (newNode->dataVal >= current->dataVal) {
-				//insert node
+				//newNode goes before current
 				newNode->nextNode = current;
 				newNode->prevNode = current->prevNode;
 				current->prevNode->nextNode = newNode;
 				current->prevNode = newNode;
+				//set current equal to NULL to end the loop
+				current = NULL;
 			}
+			//increment current
 			else {
 				current = current->nextNode;
 			}
