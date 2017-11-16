@@ -2,7 +2,7 @@
 This project is designed to simulate how an operating system uses queues to manage the registers.
 Puugu
 Project Created: 7 October 2017
-Last Edited: 15 November 2017
+Last Edited: 16 November 2017
 *****************************************************************************************************/
 
 #include <iostream>
@@ -46,7 +46,8 @@ int main() {
 	processLIFOQueue(lifo, queue2); // Will output that list is empty when finished
 	system("CLS");
 	processSortQueue(sorting, queue3);
-	//processPriorityQueue(priority, queue4, queuePriority);
+	system("CLS");
+	processPriorityQueue(priority, queue4, queuePriority);
 
 	system("pause");
 	return 0;
@@ -144,7 +145,7 @@ void processPriorityQueue(queueManager priority, int queue[100], int queuePriori
 	// This function iterates through the priority-sorted queue
 	// Puugu
 	// Created: 30 October 2017
-	// Last Edit: 30 October 2017
+	// Last Edit: 16 November 2017
 
 	//initialize queue
 	for (int i = 0; i < 10; i++) {
@@ -155,7 +156,7 @@ void processPriorityQueue(queueManager priority, int queue[100], int queuePriori
 	for (int i = 0; i < 100; i++) {
 		priority.popNodePriority();
 		if (i < 90) {
-			priority.addNodePriority(queue[i], queuePriority[i]);
+			priority.addNodePriority(queue[i+10], queuePriority[i+10]);
 		}
 	}
 }

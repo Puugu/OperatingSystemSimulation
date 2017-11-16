@@ -2,7 +2,7 @@
 These are the methods for managing the queues.
 Puugu
 Project Created: 7 October 2017
-Last Edited: 15 November 2017
+Last Edited: 16 November 2017
 *****************************************************************************************************/
 
 #include "queueManager.h"
@@ -211,93 +211,154 @@ void queueManager::addNodePriority(int dataVal, int priorityVal) {
 	if (!head) {
 		head = newNode;
 		tail = newNode;
-		//check to see if prioritiy value is 2 or 3
-		if (priorityVal == 2) {
-			//set priority1 marker
-			priority1Insert = newNode;
-			//reset p2 checker
-			first2 = false;
-		}
-		else if(priorityVal == 3) {
-			//set priority2 marker
-			priority2Insert = newNode;
-			//reset p3 checker
-			first3 = false;
-		}
 	}
-	//check to see priority of newNode
-	else {
-		switch (priorityVal) {
-		case 3:
-			newNode->nextNode = head;
-			head->prevNode = newNode;
+	//check to see if priority of newNode is >= the priority of the head
+	//(if it is, then insert it at the head)
+	else if (newNode->priorityVal >= head->priorityVal){
+		newNode->nextNode = head;
+		head->prevNode = newNode;
+		head = newNode;
+	}
+	//check to see if the newNode's priority value is lower than 
+	//that of the tail (if so, make it the new tail
+	else if (newNode->priorityVal < tail->priorityVal) {
+		newNode->prevNode = tail;
+		tail->nextNode = newNode;
+		tail = newNode;
+	}
+	/*check to see if head and tail are the same
+	if so, insert node before/after head in relation to appropriate priorities
+	(this checks to see if there is more than one node in the list)*/
+	else if (head == tail) {
+		if (head->priorityVal > newNode->priorityVal) {
+			//make newNode the tail
+			head->nextNode = newNode;
+			newNode->prevNode = head;
+			tail = newNode;
+		}
+		else {
+			//newNode->priorityVal is >= head->priorityVal
+			//make newNode the head
+			tail->prevNode = newNode;
+			newNode->nextNode = tail;
 			head = newNode;
-			//check to see if is first priority 3
-			if (first3 == true) {
-				//set priority2 marker
-				priority2Insert = newNode;
-				//reset p3 checker
-				first3 = false;
-			}
-			break;
-		case 1:
-			//check to see if priority1 pointer has been set
-			if (priority1Insert != NULL) {
-				//add new node
-				newNode->nextNode = priority1Insert->nextNode;
-				newNode->nextNode->prevNode = newNode;
-				newNode->prevNode = priority1Insert;
-				priority1Insert->nextNode = newNode;
-			}
-			//priority1 pointer has not been set, check to see tail has priority1
-			else if (tail->priorityVal != 1) {
-				//no nodes with priority 1 have been added, newNode should be tail
-				newNode->prevNode = tail;
-				tail->nextNode = newNode;
-				tail = newNode;
-			}
-			else {
-				//set current = tail
-				current = tail;
-				//iterate back from tail until priority !=1
-				while (current->priorityVal == 1) {
-					current = current->prevNode;
-				}
-				//add node
-				newNode->nextNode = current->nextNode;
-				newNode->prevNode = current;
-				current->nextNode = newNode;
-				newNode->nextNode->prevNode = newNode;
-			}
-			break;
-		case 2:
-			//check to see if is first p2
-			if (first2 == true) {
-				//set p1 pointer to node
-				priority1Insert = newNode;
-				//reset p2 counter
-				first2 = false;
-			}
-			//check to see if priority2 pointer has been set
-			if (priority2Insert != NULL) {
-				//add new node
-				newNode->nextNode = priority2Insert->nextNode;
-				priority2Insert->nextNode->prevNode = newNode;
-				priority2Insert->nextNode = newNode;
-				newNode->prevNode = priority2Insert;
-			}
-			//priority2 pointer has not been set, no p3s have been entered and
-			//node should be new head
-			else {
-				newNode->nextNode = head;
-				head->prevNode = newNode;
-				head = newNode;
-			}
-			break;
-		default:
-			cout << "ERROR: Priority level is too low.\n";
 		}
 	}
+	//iterate through list to find where priority 2 or 1 begins (as relative to priorityVal
+	//of newNode) and insert in correct location
+	else {
+		//set current equal to head
+		current = head;
+
+		while (current != NULL) {
+			//check to see if priority of current node equals priority of newNode
+			//if it does, insert newNode before current node
+			if (current->priorityVal == newNode->priorityVal) {
+				newNode->nextNode = current;
+				newNode->prevNode = current->prevNode;
+				current->prevNode->nextNode = newNode;
+				current->prevNode = newNode;
+				//set current equal to NULL to exit loop
+				current = NULL;
+			}
+			else {
+				//increment current
+				current = current->nextNode;
+			}
+		}
+	}
+
+	////check to see if head exists
+	//if (!head) {
+	//	head = newNode;
+	//	tail = newNode;
+	//	//check to see if prioritiy value is 2 or 3
+	//	if (priorityVal == 2) {
+	//		//set priority1 marker
+	//		priority1Insert = newNode;
+	//		//reset p2 checker
+	//		first2 = false;
+	//	}
+	//	else if(priorityVal == 3) {
+	//		//set priority2 marker
+	//		priority2Insert = newNode;
+	//		//reset p3 checker
+	//		first3 = false;
+	//	}
+	//}
+	////check to see priority of newNode
+	//else {
+	//	switch (priorityVal) {
+	//	case 3:
+	//		newNode->nextNode = head;
+	//		head->prevNode = newNode;
+	//		head = newNode;
+	//		//check to see if is first priority 3
+	//		if (first3 == true) {
+	//			//set priority2 marker
+	//			priority2Insert = newNode;
+	//			//reset p3 checker
+	//			first3 = false;
+	//		}
+	//		break;
+	//	case 1:
+	//		//check to see if priority1 pointer has been set
+	//		if (priority1Insert != NULL) {
+	//			//add new node
+	//			newNode->nextNode = priority1Insert->nextNode;
+	//			newNode->nextNode->prevNode = newNode;
+	//			newNode->prevNode = priority1Insert;
+	//			priority1Insert->nextNode = newNode;
+	//		}
+	//		//priority1 pointer has not been set, check to see tail has priority1
+	//		else if (tail->priorityVal != 1) {
+	//			//no nodes with priority 1 have been added, newNode should be tail
+	//			newNode->prevNode = tail;
+	//			tail->nextNode = newNode;
+	//			tail = newNode;
+	//		}
+	//		else {
+	//			//set current = tail
+	//			current = tail;
+	//			//iterate back from tail until priority !=1
+	//			while (current->priorityVal == 1) {
+	//				current = current->prevNode;
+	//			}
+	//			//add node
+	//			newNode->nextNode = current->nextNode;
+	//			newNode->prevNode = current;
+	//			current->nextNode = newNode;
+	//			newNode->nextNode->prevNode = newNode;
+	//		}
+	//		break;
+	//	case 2:
+	//		//check to see if is first p2
+	//		if (first2 == true) {
+	//			//set p1 pointer to node
+	//			priority1Insert = newNode;
+	//			//reset p2 counter
+	//			first2 = false;
+	//		}
+	//		//check to see if priority2 pointer has been set
+	//		if (priority2Insert != NULL) {
+	//			//add new node
+	//			newNode->nextNode = priority2Insert->nextNode;
+	//			priority2Insert->nextNode->prevNode = newNode;
+	//			priority2Insert->nextNode = newNode;
+	//			newNode->prevNode = priority2Insert;
+	//		}
+	//		//priority2 pointer has not been set, no p3s have been entered and
+	//		//node should be new head
+	//		else {
+	//			newNode->nextNode = head;
+	//			head->prevNode = newNode;
+	//			head = newNode;
+	//		}
+	//		break;
+	//	default:
+	//		cout << "ERROR: Priority level is too low.\n";
+	//	}
+	//}
 }
 
 //pop priority node
