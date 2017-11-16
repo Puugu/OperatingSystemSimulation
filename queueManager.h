@@ -4,7 +4,7 @@
 This is the header file for managing the queue for the operating systems simulation.
 Puugu
 Project Created: 7 October 2017
-Last Edited: 30 October 2017
+Last Edited: 16 Novemeber 2017
 *****************************************************************************************************/
 
 #include <iostream>
@@ -49,11 +49,17 @@ public:
 	//pop node (FIFO)
 	void popNodeFIFO();
 
+	//get value that will be popped (FIFO
+	int getFIFOpop();
+
 	//create node adn insert onto tail (LIFO)
 	void addNodeLIFO(int dataVal);
 
 	//pop node LIFO
 	void popNodeLIFO();
+
+	//get value that will be popped (LIFO)
+	int getLIFOpop();
 
 	//create node and insert via sorting
 		//largest to tail
@@ -62,11 +68,17 @@ public:
 	//pop node sort
 	void popNodeSort();
 
+	//get value that will be popped (sorting)
+	int getSORTpop();
+
 	//create node and insert via priority
 	void addNodePriority(int dataVal, int priorityVal);
 
 	//pop node priority
 	void popNodePriority();
+
+	//get node that will be popped (priority)
+	int getPRIORITYpop();
 
 	//display queue
 	void displayQueue();

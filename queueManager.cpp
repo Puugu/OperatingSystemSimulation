@@ -53,7 +53,7 @@ void queueManager::popNodeFIFO(){
 	}
 	else {
 		//output data value of popped node
-		cout << "Popping: " << tail->dataVal<<endl;
+//		cout << "Popping: " << tail->dataVal<<endl;
 		//check to see if more than one node exists
 		if (tail->prevNode == NULL) {
 			//empty queue
@@ -69,6 +69,19 @@ void queueManager::popNodeFIFO(){
 			delete godzilla;
 			godzilla = NULL;
 		}
+	}
+}
+
+//get value that will be popped (FIFO)
+int queueManager::getFIFOpop() {
+	//check to see if head exists
+	if (!head) {
+		cout << "ERROR: FIFO QUEUE is empty.\n";
+		return -1;
+	}
+	else {
+		//return data value of tail
+		return tail->dataVal;
 	}
 }
 
@@ -101,7 +114,7 @@ void queueManager::popNodeLIFO() {
 	}
 	else {
 		//output data value of popped node
-		cout << "Popping: " << head->dataVal<<endl;
+//		cout << "Popping: " << head->dataVal<<endl;
 		//check to see if there is more than one node
 		if (head->nextNode == NULL) {
 			delete head;
@@ -116,6 +129,19 @@ void queueManager::popNodeLIFO() {
 			delete godzilla;
 			godzilla = NULL;
 		}
+	}
+}
+
+//get value that will be popped (LIFO)
+int queueManager::getLIFOpop() {
+	//check to see if head exists
+	if (!head) {
+		cout << "ERROR: LIFO QUEUE is empty.\n";
+		return -1;
+	}
+	else {
+		//return value at head
+		return head->dataVal;
 	}
 }
 
@@ -178,7 +204,7 @@ void queueManager::popNodeSort() {
 	}
 	else {
 		//output data value of popped node
-		cout << "Popping: " << head->dataVal<<endl;
+//		cout << "Popping: " << head->dataVal<<endl;
 		//check to see if queue only has one node
 		if (head->nextNode == NULL) {
 			//delete queue
@@ -194,6 +220,19 @@ void queueManager::popNodeSort() {
 			delete godzilla;
 			godzilla = NULL;
 		}
+	}
+}
+
+//get value that will be popped (sorting)
+int queueManager::getSORTpop() {
+	//check to see if head exists
+	if (!head) {
+		cout << "ERROR: SORT QUEUE is empty.\n";
+		return -1;
+	}
+	else {
+		//return value at head
+		return head->dataVal;
 	}
 }
 
@@ -369,7 +408,7 @@ void queueManager::popNodePriority() {
 	}
 	else {
 		//output data value of popped node
-		cout << "Popping: " << tail->dataVal << endl;
+	//	cout << "Popping: " << tail->dataVal << endl;
 		//check to see if queue only has one node
 		if (tail->prevNode == NULL) {
 			//delete queue
@@ -385,6 +424,19 @@ void queueManager::popNodePriority() {
 			delete godzilla;
 			godzilla = NULL;
 		}
+	}
+}
+
+//get value that will be popped (priority)
+int queueManager::getPRIORITYpop() {
+	//check to see if head exists
+	if (!head) {
+		cout << "ERROR: PRIORITY QUEUE is empty.\n";
+		return -1;
+	}
+	else {
+		//return data value of tail
+		return tail->dataVal;
 	}
 }
 
