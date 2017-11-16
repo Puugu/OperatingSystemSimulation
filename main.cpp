@@ -21,6 +21,7 @@ void processSortQueue(queueManager sort, int queue[100]);
 void processPriorityQueue(queueManager priority, int queue[100], int queuePriority[100]);
 void singleRegisterSimulation(int queue1[100], int queue2[100], int queue3[100], int queue4[100], int queuePriority[100]);
 void multiRegisterSimulation(int queue1[100], int queue2[100], int queue3[100], int queue4[100], int queuePriority[100]);
+void multiInOneOutSimulation(int queue1[100], int queue2[100], int queue3[100], int queue4[100], int queuePriority[100]);
 
 int main() {
 	//declare and initialize variables, etc.
@@ -54,6 +55,9 @@ int main() {
 
 	//run 4-4 register simulation
 	multiRegisterSimulation(queue1, queue2, queue3, queue4, queuePriority);
+
+	//run 4-1 register simulation
+	multiInOneOutSimulation(queue1, queue2, queue3, queue4, queuePriority);
 
 	system("pause");
 	return 0;
@@ -293,6 +297,70 @@ void multiRegisterSimulation(int queue1[100], int queue2[100], int queue3[100], 
 			lifo.addNodeLIFO(regIn2);
 			sorting.addNodeSort(regIn3);
 			priority.addNodePriority(regIn4, queuePriority[i+10]);
+			clockIn++;
+		}
+	}
+	cout << "Clock In: " << clockIn << endl;
+	cout << "Clock Out: " << clockOut << endl;
+}
+
+void multiInOneOutSimulation(int queue1[100], int queue2[100], int queue3[100], int queue4[100], int queuePriority[100]) {
+	// This function uses four input and one output registers to write the data to the file
+	// Puugu
+	// Created: 16 November 2017
+	// Last Edit: 16 November 2017
+
+	//declare and initialize variables, etc.
+	int clockIn = 0;
+	int clockOut = 0;
+	int regIn1 = 0;
+	int regIn2 = 0;
+	int regIn3 = 0;
+	int regIn4 = 0;
+	int regOut = 0;
+	queueManager fifo;
+	queueManager lifo;
+	queueManager sorting;
+	queueManager priority;
+
+	//fill beginning queue and registers with first 10 values
+	for (int i = 0; i < 10; i++) {
+		regIn1 = queue1[i];
+		regIn2 = queue2[i];
+		regIn3 = queue3[i];
+		regIn4 = queue4[i];
+		fifo.addNodeFIFO(regIn1);
+		lifo.addNodeLIFO(regIn2);
+		sorting.addNodeSort(regIn3);
+		priority.addNodePriority(regIn4, queuePriority[i]);
+		clockIn++;
+	}
+
+	//move through the rest of the queue
+	for (int i = 0; i < 100; i++) {
+		//pop value from each of the queues
+		regOut = fifo.getFIFOpop();
+		fifo.popNodeFIFO();
+		clockOut++;
+		regOut = lifo.getLIFOpop();
+		lifo.popNodeLIFO();
+		clockOut++;
+		regOut = sorting.getSORTpop();
+		sorting.popNodeSort();
+		clockOut++;
+		regOut = priority.getPRIORITYpop();
+		priority.popNodePriority();
+		clockOut++;
+		//add new value to queue
+		if (i < 90) {
+			regIn1 = queue1[i + 10];
+			regIn2 = queue2[i + 10];
+			regIn3 = queue3[i + 10];
+			regIn4 = queue4[i + 10];
+			fifo.addNodeFIFO(regIn1);
+			lifo.addNodeLIFO(regIn2);
+			sorting.addNodeSort(regIn3);
+			priority.addNodePriority(regIn4, queuePriority[i + 10]);
 			clockIn++;
 		}
 	}
