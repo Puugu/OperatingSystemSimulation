@@ -9,6 +9,7 @@ Last Edited: 16 November 2017
 #include <cstdlib>
 #include <ctime>
 #include "queueManager.h"
+#include <fstream>
 
 using namespace std;
 
@@ -18,6 +19,8 @@ void processFIFOQueue(queueManager fifo, int queue[100]);
 void processLIFOQueue(queueManager lifo, int queue[100]);
 void processSortQueue(queueManager sort, int queue[100]);
 void processPriorityQueue(queueManager priority, int queue[100], int queuePriority[100]);
+void singleRegisterSimulation(int queue1[100], int queue2[100], int queue3[100], int queue4[100], int queuePriority[100]);
+void multiRegisterSimulation(int queue1[100], int queue2[100], int queue3[100], int queue4[100], int queuePriority[100]);
 
 int main() {
 	//declare and initialize variables, etc.
@@ -39,15 +42,17 @@ int main() {
 	queueManager lifo;
 	queueManager sorting;
 	queueManager priority;
-
+	
 	//iterate through each queue
 	processFIFOQueue(fifo, queue1); // Will output that list is empty when finished
-	system("CLS");
 	processLIFOQueue(lifo, queue2); // Will output that list is empty when finished
-	system("CLS");
-	processSortQueue(sorting, queue3);
-	system("CLS");
-	processPriorityQueue(priority, queue4, queuePriority);
+	processSortQueue(sorting, queue3); // Will output that list is empty when finished
+	processPriorityQueue(priority, queue4, queuePriority); // Will output that list is empty when finished
+
+	//run single register simulation
+	singleRegisterSimulation(queue1, queue2, queue3, queue4, queuePriority);
+
+	//run 4-4 register simulation
 
 	system("pause");
 	return 0;
@@ -159,4 +164,78 @@ void processPriorityQueue(queueManager priority, int queue[100], int queuePriori
 			priority.addNodePriority(queue[i+10], queuePriority[i+10]);
 		}
 	}
+}
+
+void singleRegisterSimulation(int queue1[100], int queue2[100], int queue3[100], int queue4[100], int queuePriority[100]) {
+	// This function uses one input and one output register to write the data to the file
+	// Puugu
+	// Created: 16 November 2017
+	// Last Edit: 16 November 2017
+
+	//declare and intiialize variables, etc.
+	int regIn = 0;;
+	int regOut = 0;
+	int clockIn = 0;
+	int clockOut = 0;
+	queueManager fifo;
+	queueManager lifo;
+	queueManager sorting;
+	queueManager priority;
+	ofstream outputFile("output.txt");
+
+	//fill beginning queue and registers with first 10 values
+	for (int i = 0; i < 10; i++) {
+		regIn = queue1[i];
+		fifo.addNodeFIFO(regIn);
+		clockIn++;
+		regIn = queue2[i];
+		lifo.addNodeLIFO(regIn);
+		clockIn++;
+		regIn = queue3[i];
+		sorting.addNodeSort(regIn);
+		clockIn++;
+		regIn = queue4[i];
+		priority.addNodePriority(regIn, queuePriority[i]);
+		clockIn++;
+	}
+
+	//move through the rest of the queue
+	for (int i = 0; i < 100; i++) {
+		//pop value from each of the queues
+		regOut = fifo.getFIFOpop();
+		fifo.popNodeFIFO();
+		clockOut++;
+		regOut = lifo.getLIFOpop();
+		lifo.popNodeLIFO();
+		clockOut++;
+		regOut = sorting.getSORTpop();
+		sorting.popNodeSort();
+		clockOut++;
+		regOut = priority.getPRIORITYpop();
+		priority.popNodePriority();
+		clockOut++;
+		//add new value to queue
+		if (i < 90) {
+			regIn = queue1[i+10];
+			fifo.addNodeFIFO(regIn);
+			clockIn++;
+			regIn = queue2[i+10];
+			lifo.addNodeLIFO(regIn);
+			clockIn++;
+			regIn = queue3[i+10];
+			sorting.addNodeSort(regIn);
+			clockIn++;
+			regIn = queue4[i+10];
+			priority.addNodePriority(regIn, queuePriority[i+10]);
+			clockIn++;
+		}
+	}
+	cout << "Clock In: " << clockIn << endl << "Clock Out: " << clockOut << endl;
+}
+
+void multiRegisterSimulation(int queue1[100], int queue2[100], int queue3[100], int queue4[100], int queuePriority[100]) {
+	// This function uses four input and four output registers to write the data to the file
+	// Puugu
+	// Created: 16 November 2017
+	// Last Edit: 16 November 2017
 }
